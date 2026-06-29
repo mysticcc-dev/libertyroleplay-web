@@ -40,6 +40,9 @@ export function LiveCityWidget({ className }: { className?: string }) {
 
   return (
     <div
+      // Counts update on a 30s poll; announce them politely to assistive tech.
+      role="status"
+      aria-live="polite"
       className={`surface-glass inline-flex flex-wrap items-center gap-x-6 gap-y-3 rounded-full px-5 py-3 ${className ?? ""}`}
     >
       <span className="inline-flex items-center gap-2">

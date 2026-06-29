@@ -1,3 +1,4 @@
+import "server-only"
 import { z } from "zod"
 
 /**
@@ -6,7 +7,10 @@ import { z } from "zod"
  * Only `NEXT_PUBLIC_SITE_URL` is needed for the public marketing build (it has
  * a sensible default), so a fresh build never requires secrets. Server-only
  * values used by later milestones are optional here and validated where used.
- * Import this from server code only — never a client component.
+ *
+ * The `server-only` import makes it a build error to import this module from a
+ * client component — these values (including secrets) must never reach the
+ * browser bundle.
  */
 const schema = z.object({
   NEXT_PUBLIC_SITE_URL: z.string().url().default("http://localhost:3000"),

@@ -16,6 +16,10 @@ export function FactionCard({
   faction: FactionDefinition
   className?: string
 }) {
+  const accent = faction.colorAccent
+  // Lift the accent toward bone for small foreground text, so even the darkest
+  // faction accent (ember red) clears WCAG AA contrast on the card surface.
+  const textAccent = `color-mix(in oklab, ${accent} 62%, var(--color-bone))`
   return (
     <Link
       href={`/factions/${faction.slug}`}
@@ -43,8 +47,8 @@ export function FactionCard({
         <span
           className="rounded-full border px-2 py-0.5 font-mono text-[0.65rem] uppercase tracking-wider"
           style={{
-            color: faction.colorAccent,
-            borderColor: `color-mix(in oklab, ${faction.colorAccent} 45%, transparent)`,
+            color: textAccent,
+            borderColor: `color-mix(in oklab, ${accent} 45%, transparent)`,
           }}
         >
           {RECRUITING_LABEL[faction.recruitingStatus]}
@@ -56,7 +60,7 @@ export function FactionCard({
 
       <span
         className="mt-5 inline-flex items-center gap-1.5 font-head text-sm font-medium transition-transform group-hover:translate-x-1"
-        style={{ color: faction.colorAccent }}
+        style={{ color: textAccent }}
       >
         Enter the file
         <ArrowRight width={16} height={16} />

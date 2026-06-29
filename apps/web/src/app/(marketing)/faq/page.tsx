@@ -1,16 +1,17 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import { PageHeader } from "@/components/brand/page-header"
 import { Section } from "@/components/brand/section"
 import { Reveal } from "@/components/motion/reveal"
 import { ChevronDown } from "@/components/ui/icons"
 import { FAQ, type FaqItem } from "@/lib/content"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "FAQ",
   description:
     "The questions people ask before they apply — about joining, playing, and how Liberty keeps the city fair and safe.",
-}
+  path: "/faq",
+})
 
 const GROUPS: FaqItem["group"][] = ["Joining", "Playing", "Rules & Safety"]
 

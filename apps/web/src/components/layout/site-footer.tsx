@@ -50,7 +50,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <p className="mt-12 max-w-3xl text-xs leading-relaxed text-concrete/80">
+        <p className="mt-12 max-w-3xl text-xs leading-relaxed text-concrete">
           {SUPPORTER_DISCLAIMER}
         </p>
 

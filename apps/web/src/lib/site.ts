@@ -6,9 +6,9 @@ export const site = {
   short: BRAND.short,
   tagline: BRAND.tagline,
   description: BRAND.description,
-  // Public base URL — falls back to localhost for local dev. Read directly so
-  // Next can inline the NEXT_PUBLIC_ value into both server and client output.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  // The public base URL lives in `@/lib/env` (validated, server-only) so it is
+  // never read unvalidated and never bundled into client code. This config is
+  // client-safe and holds only static identity + navigation.
   discordInvite: "https://discord.gg/libertyrp",
   nav: [
     { label: "The City", href: "/the-city" },

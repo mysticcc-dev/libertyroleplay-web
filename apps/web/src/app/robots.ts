@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { site } from "@/lib/site"
+import { env } from "@/lib/env"
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       // Member and staff areas (later milestones) stay out of the index.
       disallow: ["/dashboard", "/staff", "/api/", "/styleguide"],
     },
-    sitemap: `${site.url}/sitemap.xml`,
+    sitemap: `${env.NEXT_PUBLIC_SITE_URL}/sitemap.xml`,
   }
 }

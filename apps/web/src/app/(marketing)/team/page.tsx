@@ -1,14 +1,15 @@
-import type { Metadata } from "next"
 import { PageHeader } from "@/components/brand/page-header"
 import { Section, SectionHeading } from "@/components/brand/section"
 import { Reveal } from "@/components/motion/reveal"
 import { TEAM } from "@/lib/content"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "Team",
   description:
     "The people who keep Liberty running — direction, staff, story and the machinery behind the city.",
-}
+  path: "/team",
+})
 
 export default function TeamPage() {
   return (

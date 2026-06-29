@@ -7,6 +7,7 @@ import { Container, Section } from "@/components/brand/section"
 import { Reveal } from "@/components/motion/reveal"
 import { buttonVariants } from "@/components/ui/button"
 import { ArrowRight } from "@/components/ui/icons"
+import { createMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 type Params = { params: Promise<{ slug: string }> }
@@ -25,11 +26,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params
   const faction = getFaction(slug)
   if (!faction) return {}
-  return {
+  return createMetadata({
     title: faction.name,
     description: faction.tagline,
-    openGraph: { title: faction.name, description: faction.tagline },
-  }
+    path: `/factions/${slug}`,
+  })
 }
 
 export default async function FactionDetailPage({ params }: Params) {
@@ -39,6 +40,8 @@ export default async function FactionDetailPage({ params }: Params) {
 
   const others = FACTIONS.filter((f) => f.slug !== faction.slug).slice(0, 3)
   const accent = faction.colorAccent
+  // Lifted accent for small foreground text so the darkest accent still clears AA.
+  const textAccent = `color-mix(in oklab, ${accent} 62%, var(--color-bone))`
 
   return (
     <>
@@ -65,7 +68,7 @@ export default async function FactionDetailPage({ params }: Params) {
               <span
                 className="rounded-full border px-3 py-1 font-mono text-[0.7rem] uppercase tracking-wider"
                 style={{
-                  color: accent,
+                  color: textAccent,
                   borderColor: `color-mix(in oklab, ${accent} 45%, transparent)`,
                 }}
               >
@@ -115,7 +118,7 @@ export default async function FactionDetailPage({ params }: Params) {
                 <p className="font-mono text-[0.7rem] uppercase tracking-wider text-concrete">
                   Intake
                 </p>
-                <p className="mt-2 font-head text-base font-semibold" style={{ color: accent }}>
+                <p className="mt-2 font-head text-base font-semibold" style={{ color: textAccent }}>
                   {RECRUITING_LABEL[faction.recruitingStatus]}
                 </p>
               </div>

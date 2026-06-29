@@ -1,4 +1,5 @@
 import { FACTIONS } from "@liberty/shared"
+import type { Metadata } from "next"
 import Link from "next/link"
 import { CinematicCard } from "@/components/brand/cinematic-card"
 import { FactionCard } from "@/components/brand/faction-card"
@@ -12,6 +13,12 @@ import { buttonVariants } from "@/components/ui/button"
 import { ArrowRight, Flame, MapPin, Shield, Users } from "@/components/ui/icons"
 import { HOME_SECTIONS, HOW_IT_WORKS } from "@/lib/content"
 import { cn } from "@/lib/utils"
+
+// The home page keeps the root layout's default title and OG card; it only
+// needs to declare its own canonical URL.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+}
 
 export default function HomePage() {
   return (
@@ -171,13 +178,13 @@ function HowItWorksPreview() {
       <SectionHeading eyebrow="How it works" title="From the outside in, in four moves." />
       <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {HOW_IT_WORKS.map((step, i) => (
-          <Reveal key={step.n} delay={i * 0.06}>
-            <li className="surface-card h-full p-6">
+          <li key={step.n} className="h-full">
+            <Reveal className="surface-card block h-full p-6" delay={i * 0.06}>
               <span className="font-display text-3xl text-ignition">{step.n}</span>
               <h3 className="mt-3 font-head text-lg font-semibold text-bone">{step.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-concrete">{step.body}</p>
-            </li>
-          </Reveal>
+            </Reveal>
+          </li>
         ))}
       </ol>
       <div className="mt-10">

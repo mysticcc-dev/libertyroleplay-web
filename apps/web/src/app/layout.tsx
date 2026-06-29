@@ -3,12 +3,13 @@ import { GrainOverlay } from "@/components/brand/grain-overlay"
 import { LenisProvider } from "@/components/motion/lenis-provider"
 import { ScrollProgress } from "@/components/motion/scroll-progress"
 import { TorchCursor } from "@/components/motion/torch-cursor"
+import { env } from "@/lib/env"
 import { fontVariables } from "@/lib/fonts"
 import { site } from "@/lib/site"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
     default: `${site.name} — ${site.tagline}`,
     template: `%s · ${site.name}`,
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
-    url: site.url,
+    url: "/",
     locale: "en_US",
   },
   twitter: {

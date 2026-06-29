@@ -44,7 +44,7 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
 
 export default function StyleguidePage() {
   return (
-    <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8">
+    <main id="main" className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8">
       <header className="flex items-center justify-between">
         <div className="inline-flex items-center gap-3">
           <Torch width={30} height={30} className="text-ignition" />
@@ -170,6 +170,6 @@ export default function StyleguidePage() {
           ))}
         </div>
       </Block>
-    </div>
+    </main>
   )
 }

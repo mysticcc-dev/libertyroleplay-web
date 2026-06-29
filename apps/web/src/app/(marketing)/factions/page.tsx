@@ -1,15 +1,16 @@
 import { FACTIONS } from "@liberty/shared"
-import type { Metadata } from "next"
 import { FactionCard } from "@/components/brand/faction-card"
 import { PageHeader } from "@/components/brand/page-header"
-import { Section } from "@/components/brand/section"
+import { Section, SectionHeading } from "@/components/brand/section"
 import { Reveal } from "@/components/motion/reveal"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "Factions",
   description:
     "The founding institutions of Liberty — law and outlaws, government and press, business and the streets. Pick a side, or build your own.",
-}
+  path: "/factions",
+})
 
 export default function FactionsPage() {
   return (
@@ -25,7 +26,12 @@ export default function FactionsPage() {
       />
 
       <Section className="!pt-6">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <SectionHeading
+          eyebrow="The founding institutions"
+          title="Pick a side, or build your own."
+          lead="Each faction is an engine of stories — and a different way into the city."
+        />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {FACTIONS.map((faction, i) => (
             <Reveal key={faction.slug} delay={(i % 3) * 0.06}>
               <FactionCard faction={faction} />

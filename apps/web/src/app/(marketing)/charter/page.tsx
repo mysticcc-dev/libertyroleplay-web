@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import { PageHeader } from "@/components/brand/page-header"
 import { Section } from "@/components/brand/section"
@@ -6,13 +5,15 @@ import { Reveal } from "@/components/motion/reveal"
 import { buttonVariants } from "@/components/ui/button"
 import { ArrowRight } from "@/components/ui/icons"
 import { CHARTER } from "@/lib/content"
+import { createMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "The Charter",
   description:
     "Five principles that keep Liberty's fiction alive and its people safe. Read it, mean it, and the city is yours.",
-}
+  path: "/charter",
+})
 
 export default function CharterPage() {
   return (

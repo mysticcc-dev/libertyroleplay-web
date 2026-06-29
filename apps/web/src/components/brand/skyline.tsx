@@ -92,7 +92,7 @@ export function Skyline({
                 y={l.y}
                 width={3}
                 height={4}
-                fill={layer === "front" ? "#FF9E2C" : "#FFB627"}
+                fill={layer === "front" ? "var(--color-flare)" : "var(--color-gold)"}
                 opacity={layer === "front" ? 0.5 : 0.32}
               />
             )),

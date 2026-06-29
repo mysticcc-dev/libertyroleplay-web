@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import { PageHeader } from "@/components/brand/page-header"
 import { Section, SectionHeading } from "@/components/brand/section"
@@ -6,13 +5,15 @@ import { Reveal } from "@/components/motion/reveal"
 import { buttonVariants } from "@/components/ui/button"
 import { ArrowRight, Discord, Users, Xbox } from "@/components/ui/icons"
 import { HOW_IT_WORKS } from "@/lib/content"
+import { createMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "How It Works",
   description:
     "What you need, how to apply, and how to step into Liberty — from the outside in, in four moves.",
-}
+  path: "/how-it-works",
+})
 
 const NEEDS = [
   {
@@ -66,8 +67,8 @@ export default function HowItWorksPage() {
         <SectionHeading eyebrow="The path" title="Four moves to a second life." />
         <ol className="mt-12 space-y-4">
           {HOW_IT_WORKS.map((step) => (
-            <Reveal key={step.n}>
-              <li className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:gap-8">
+            <li key={step.n}>
+              <Reveal className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:gap-8">
                 <span className="font-display text-5xl leading-none text-ignition">{step.n}</span>
                 <div>
                   <h3 className="font-head text-xl font-semibold text-bone">{step.title}</h3>
@@ -75,8 +76,8 @@ export default function HowItWorksPage() {
                     {step.body}
                   </p>
                 </div>
-              </li>
-            </Reveal>
+              </Reveal>
+            </li>
           ))}
         </ol>
 

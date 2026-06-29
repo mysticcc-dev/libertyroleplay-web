@@ -1,19 +1,20 @@
 import { APPLICATION_STEPS } from "@liberty/shared"
-import type { Metadata } from "next"
 import Link from "next/link"
 import { PageHeader } from "@/components/brand/page-header"
 import { Section } from "@/components/brand/section"
 import { Reveal } from "@/components/motion/reveal"
 import { buttonVariants } from "@/components/ui/button"
 import { ArrowRight, Discord } from "@/components/ui/icons"
+import { createMetadata } from "@/lib/seo"
 import { site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "Apply",
   description:
     "Apply to Liberty Roleplay. A short, guided story — about ten minutes. Staff read every application by hand.",
-}
+  path: "/apply",
+})
 
 export default function ApplyPage() {
   return (
@@ -32,8 +33,8 @@ export default function ApplyPage() {
         <div className="mx-auto max-w-3xl">
           <ol className="space-y-3">
             {APPLICATION_STEPS.map((step, i) => (
-              <Reveal key={step.id}>
-                <li className="surface-card flex items-start gap-5 p-6">
+              <li key={step.id}>
+                <Reveal className="surface-card flex items-start gap-5 p-6">
                   <span className="font-mono text-sm text-flare">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -41,8 +42,8 @@ export default function ApplyPage() {
                     <h2 className="font-head text-lg font-semibold text-bone">{step.title}</h2>
                     <p className="mt-1.5 text-sm leading-relaxed text-concrete">{step.blurb}</p>
                   </div>
-                </li>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
           </ol>
 

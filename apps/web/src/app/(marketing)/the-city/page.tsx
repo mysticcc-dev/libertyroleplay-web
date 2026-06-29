@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import { PageHeader } from "@/components/brand/page-header"
 import { Section, SectionHeading } from "@/components/brand/section"
@@ -7,13 +6,15 @@ import { Reveal } from "@/components/motion/reveal"
 import { buttonVariants } from "@/components/ui/button"
 import { ArrowRight, MapPin } from "@/components/ui/icons"
 import { DISTRICTS } from "@/lib/content"
+import { createMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "The City",
   description:
     "Six districts, one city. From the lights of Vinewood to the dark of the docks, this is the Liberty you'll call home.",
-}
+  path: "/the-city",
+})
 
 export default function TheCityPage() {
   return (

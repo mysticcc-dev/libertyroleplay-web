@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 export default function NotFound() {
   return (
-    <main className="relative grid min-h-dvh place-items-center px-6 text-center">
+    <main id="main" className="relative grid min-h-dvh place-items-center px-6 text-center">
       <div>
         <Torch
           width={48}
