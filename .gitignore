@@ -1,0 +1,41 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+.next/
+out/
+dist/
+build/
+.turbo/
+
+# env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# testing / coverage
+coverage/
+playwright-report/
+test-results/
+.playwright/
+
+# editor / os
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.pem
+*.tsbuildinfo
+
+# drizzle local
+packages/db/.drizzle-tmp/
+
+# sentry
+.sentryclirc

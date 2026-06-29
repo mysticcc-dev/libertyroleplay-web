@@ -1,0 +1,36 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "stream",
+  "globalEnv": ["NODE_ENV", "VERCEL", "VERCEL_ENV", "VERCEL_URL"],
+  "globalPassThroughEnv": [
+    "DATABASE_URL",
+    "AUTH_SECRET",
+    "AUTH_DISCORD_ID",
+    "AUTH_DISCORD_SECRET",
+    "NEXTAUTH_URL",
+    "NEXT_PUBLIC_SITE_URL",
+    "NEXT_PUBLIC_TURNSTILE_SITE_KEY"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "dependsOn": []
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "dependsOn": []
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

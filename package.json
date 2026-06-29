@@ -1,0 +1,29 @@
+{
+  "name": "liberty",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Liberty Roleplay — cinematic community website (monorepo)",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "db:generate": "pnpm --filter @liberty/db generate",
+    "db:migrate": "pnpm --filter @liberty/db migrate",
+    "db:seed": "pnpm --filter @liberty/db seed",
+    "db:studio": "pnpm --filter @liberty/db studio",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.1",
+    "turbo": "2.10.0",
+    "typescript": "6.0.3"
+  }
+}

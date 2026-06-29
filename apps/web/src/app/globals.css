@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Liberty Roleplay — design tokens (Tailwind v4, CSS-first).
+   There is no tailwind.config.js. Brand colours, fonts, radii, shadows and
+   motion all live here and generate the matching utilities (bg-asphalt,
+   text-ignition, font-display, shadow-glow, animate-flicker, …).
+   ========================================================================== */
+@theme {
+  /* --- warm-dark canvas ------------------------------------------------- */
+  --color-asphalt: #0b0907;
+  --color-gunmetal: #18120d;
+  --color-card: #1c1610;
+  --color-line: #2e2419;
+
+  /* --- orange as light source ------------------------------------------ */
+  --color-ignition: #ff6a00;
+  --color-flare: #ff9e2c;
+  --color-ember: #d84300;
+  --color-gold: #ffb627;
+
+  /* --- status accents, used sparingly ---------------------------------- */
+  --color-teal: #19e5c6;
+  --color-magenta: #ff2d6e;
+  --color-violet: #7a1fa2;
+
+  /* --- text ------------------------------------------------------------- */
+  --color-bone: #f4ede3;
+  --color-concrete: #9b8e7e;
+
+  /* --- type ------------------------------------------------------------- */
+  --font-display: var(--font-anton), "Arial Narrow", "Helvetica Neue", sans-serif;
+  --font-head: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* --- radii ------------------------------------------------------------ */
+  --radius-card: 0.9rem;
+
+  /* --- signature shadows / glows --------------------------------------- */
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--color-ignition) 35%, transparent),
+    0 18px 60px -20px color-mix(in oklab, var(--color-ignition) 55%, transparent);
+  --shadow-ember: 0 22px 70px -30px color-mix(in oklab, var(--color-ember) 70%, transparent);
+
+  /* --- motion ----------------------------------------------------------- */
+  --animate-flicker: flicker 5s ease-in-out infinite;
+  --animate-rise: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-drift: drift 18s linear infinite;
+  --animate-pulse-glow: pulse-glow 3.2s ease-in-out infinite;
+
+  @keyframes flicker {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    42% {
+      opacity: 0.86;
+    }
+    44% {
+      opacity: 0.74;
+    }
+    46% {
+      opacity: 0.92;
+    }
+    70% {
+      opacity: 0.82;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 26px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes drift {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 600px 0;
+    }
+  }
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+/* ==========================================================================
+   Base layer
+   ========================================================================== */
+@layer base {
+  :root {
+    color-scheme: dark;
+    --header-h: 4.5rem;
+  }
+
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--color-asphalt);
+    color: var(--color-bone);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* The whole canvas sits under a low warm gradient — golden hour. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        120% 80% at 50% 120%,
+        color-mix(in oklab, var(--color-ember) 26%, transparent),
+        transparent 60%
+      ),
+      radial-gradient(
+        90% 60% at 85% -10%,
+        color-mix(in oklab, var(--color-ignition) 14%, transparent),
+        transparent 55%
+      );
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-head);
+    font-weight: 600;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-ignition) 40%, transparent);
+    color: var(--color-bone);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-flare);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Honour reduced motion everywhere — the spectacle never costs usability. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Custom utilities
+   ========================================================================== */
+
+/* Display type with a warm gradient fill. */
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold),
+    var(--color-flare) 40%,
+    var(--color-ignition) 75%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-glow {
+  text-shadow: 0 0 24px color-mix(in oklab, var(--color-ignition) 55%, transparent);
+}
+
+/* The brand surface treatment for cards: warm glass with an inner light. */
+@utility surface-card {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-card) 92%, white 4%),
+      var(--color-card)
+    );
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+@utility surface-glass {
+  background-color: color-mix(in oklab, var(--color-gunmetal) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid color-mix(in oklab, var(--color-line) 80%, transparent);
+}
+
+/* A hairline ignition rule. */
+@utility rule-ember {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-ignition) 70%, transparent),
+    transparent
+  );
+}
+
+/* Film grain — set as a fixed overlay by <GrainOverlay/>. */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
